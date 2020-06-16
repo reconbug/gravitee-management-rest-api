@@ -17,7 +17,6 @@ package io.gravitee.rest.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.gravitee.rest.api.model.annotations.ParameterKey;
 import io.gravitee.rest.api.model.parameters.Key;
 
@@ -27,7 +26,7 @@ import java.util.List;
  * @author Nicolas GERAUD (nicolas.geraud at graviteesource.com)
  * @author GraviteeSource Team
  */
-@JsonIgnoreProperties(value={ "baseURL" })
+@JsonIgnoreProperties(value = {"baseURL", "orgId", "envId", "orgBaseURL", "envBaseURL"})
 public class PortalConfigEntity {
 
     private Company company;
@@ -71,6 +70,7 @@ public class PortalConfigEntity {
     public Company getCompany() {
         return company;
     }
+
     public void setCompany(Company company) {
         this.company = company;
     }
@@ -78,6 +78,7 @@ public class PortalConfigEntity {
     public Portal getPortal() {
         return portal;
     }
+
     public void setPortal(Portal portal) {
         this.portal = portal;
     }
@@ -85,6 +86,7 @@ public class PortalConfigEntity {
     public Management getManagement() {
         return management;
     }
+
     public void setManagement(Management management) {
         this.management = management;
     }
@@ -92,6 +94,7 @@ public class PortalConfigEntity {
     public Authentication getAuthentication() {
         return authentication;
     }
+
     public void setAuthentication(Authentication authentication) {
         this.authentication = authentication;
     }
@@ -99,6 +102,7 @@ public class PortalConfigEntity {
     public Scheduler getScheduler() {
         return scheduler;
     }
+
     public void setScheduler(Scheduler scheduler) {
         this.scheduler = scheduler;
     }
@@ -106,6 +110,7 @@ public class PortalConfigEntity {
     public Documentation getDocumentation() {
         return documentation;
     }
+
     public void setDocumentation(Documentation documentation) {
         this.documentation = documentation;
     }
@@ -113,6 +118,7 @@ public class PortalConfigEntity {
     public Theme getTheme() {
         return theme;
     }
+
     public void setTheme(Theme theme) {
         this.theme = theme;
     }
@@ -120,6 +126,7 @@ public class PortalConfigEntity {
     public Plan getPlan() {
         return plan;
     }
+
     public void setPlan(Plan plan) {
         this.plan = plan;
     }
@@ -127,6 +134,7 @@ public class PortalConfigEntity {
     public ApiQualityMetrics getApiQualityMetrics() {
         return apiQualityMetrics;
     }
+
     public void setApiQualityMetrics(ApiQualityMetrics apiQualityMetrics) {
         this.apiQualityMetrics = apiQualityMetrics;
     }
@@ -142,6 +150,7 @@ public class PortalConfigEntity {
     public Logging getLogging() {
         return logging;
     }
+
     public void setLogging(Logging logging) {
         this.logging = logging;
     }
@@ -194,6 +203,281 @@ public class PortalConfigEntity {
         this.reCaptcha = reCaptcha;
     }
 
+    public static class GoogleAuthentication {
+        //        @ParameterKey(Key.AUTHENTICATION_GOOGLE_CLIENTID)
+        private String clientId;
+
+        public String getClientId() {
+            return clientId;
+        }
+
+        public void setClientId(String clientId) {
+            this.clientId = clientId;
+        }
+    }
+
+    public static class GithubAuthentication {
+        //        @ParameterKey(Key.AUTHENTICATION_GITHUB_CLIENTID)
+        private String clientId;
+
+        public String getClientId() {
+            return clientId;
+        }
+
+        public void setClientId(String clientId) {
+            this.clientId = clientId;
+        }
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class OAuth2Authentication {
+        //        @ParameterKey(Key.AUTHENTICATION_OAUTH2_CLIENTID)
+        private String clientId;
+        @ParameterKey(Key.AUTHENTICATION_OAUTH2_NAME)
+        private String name;
+        @ParameterKey(Key.AUTHENTICATION_OAUTH2_COLOR)
+        private String color;
+        @ParameterKey(Key.AUTHENTICATION_OAUTH2_AUTHORIZATION_ENDPOINT)
+        private String authorizationEndpoint;
+        @ParameterKey(Key.AUTHENTICATION_OAUTH2_USER_LOGOUT_ENDPOINT)
+        private String userLogoutEndpoint;
+        @ParameterKey(Key.AUTHENTICATION_OAUTH2_SCOPE)
+        private List<String> scope;
+
+        public String getClientId() {
+            return clientId;
+        }
+
+        public void setClientId(String clientId) {
+            this.clientId = clientId;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getColor() {
+            return color;
+        }
+
+        public void setColor(String color) {
+            this.color = color;
+        }
+
+        public String getAuthorizationEndpoint() {
+            return authorizationEndpoint;
+        }
+
+        public void setAuthorizationEndpoint(String authorizationEndpoint) {
+            this.authorizationEndpoint = authorizationEndpoint;
+        }
+
+        public String getUserLogoutEndpoint() {
+            return userLogoutEndpoint;
+        }
+
+        public void setUserLogoutEndpoint(String userLogoutEndpoint) {
+            this.userLogoutEndpoint = userLogoutEndpoint;
+        }
+
+        public List<String> getScope() {
+            return scope;
+        }
+
+        public void setScope(List<String> scope) {
+            this.scope = scope;
+        }
+    }
+
+    public static class Enabled {
+        private boolean enabled;
+
+        Enabled() {
+        }
+
+        public Enabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+    }
+
+    public static class PortalAnalytics {
+
+        @ParameterKey(Key.PORTAL_ANALYTICS_ENABLED)
+        private Boolean enabled;
+        @ParameterKey(Key.PORTAL_ANALYTICS_TRACKINGID)
+        private String trackingId;
+
+        public Boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(Boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public String getTrackingId() {
+            return trackingId;
+        }
+
+        public void setTrackingId(String trackingId) {
+            this.trackingId = trackingId;
+        }
+
+    }
+
+    public static class Alert {
+        @ParameterKey(Key.ALERT_ENABLED)
+        private Boolean enabled;
+
+        public Boolean getEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(Boolean enabled) {
+            this.enabled = enabled;
+        }
+    }
+
+    public static class PortalApis {
+        @ParameterKey(Key.PORTAL_APIS_TILESMODE_ENABLED)
+        private Enabled tilesMode;
+
+        @ParameterKey(Key.PORTAL_APIS_CATEGORY_ENABLED)
+        private Enabled categoryMode;
+
+        @ParameterKey(Key.PORTAL_APIS_SHOW_TAGS_IN_APIHEADER)
+        private Enabled apiHeaderShowTags;
+
+        @ParameterKey(Key.PORTAL_APIS_SHOW_CATEGORIES_IN_APIHEADER)
+        private Enabled apiHeaderShowCategories;
+
+        public Enabled getTilesMode() {
+            return tilesMode;
+        }
+
+        public void setTilesMode(Enabled tilesMode) {
+            this.tilesMode = tilesMode;
+        }
+
+        public Enabled getCategoryMode() {
+            return categoryMode;
+        }
+
+        public void setCategoryMode(Enabled categoryMode) {
+            this.categoryMode = categoryMode;
+        }
+
+        public Enabled getApiHeaderShowTags() {
+            return apiHeaderShowTags;
+        }
+
+        public void setApiHeaderShowTags(Enabled apiHeaderShowTags) {
+            this.apiHeaderShowTags = apiHeaderShowTags;
+        }
+
+        public Enabled getApiHeaderShowCategories() {
+            return apiHeaderShowCategories;
+        }
+
+        public void setApiHeaderShowCategories(Enabled apiHeaderShowCategories) {
+            this.apiHeaderShowCategories = apiHeaderShowCategories;
+        }
+    }
+
+    public static class PlanSecurity {
+        @ParameterKey(Key.PLAN_SECURITY_APIKEY_ENABLED)
+        private Enabled apikey;
+
+        @ParameterKey(Key.PLAN_SECURITY_OAUTH2_ENABLED)
+        private Enabled oauth2;
+
+        @ParameterKey(Key.PLAN_SECURITY_KEYLESS_ENABLED)
+        private Enabled keyless;
+
+        @ParameterKey(Key.PLAN_SECURITY_JWT_ENABLED)
+        private Enabled jwt;
+
+        public Enabled getApikey() {
+            return apikey;
+        }
+
+        public void setApikey(Enabled apikey) {
+            this.apikey = apikey;
+        }
+
+        public Enabled getOauth2() {
+            return oauth2;
+        }
+
+        public void setOauth2(Enabled oauth2) {
+            this.oauth2 = oauth2;
+        }
+
+        public Enabled getKeyless() {
+            return keyless;
+        }
+
+        public void setKeyless(Enabled keyless) {
+            this.keyless = keyless;
+        }
+
+        public Enabled getJwt() {
+            return jwt;
+        }
+
+        public void setJwt(Enabled jwt) {
+            this.jwt = jwt;
+        }
+    }
+
+    public static class Newsletter {
+        @ParameterKey(Key.NEWSLETTER_ENABLED)
+        private Boolean enabled;
+
+        public Boolean getEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(Boolean enabled) {
+            this.enabled = enabled;
+        }
+    }
+
+    public static class ReCaptcha {
+        @ParameterKey(Key.RECAPTCHA_ENABLED)
+        private Boolean enabled;
+        @ParameterKey(Key.RECAPTCHA_SITE_KEY)
+        private String siteKey;
+
+        public Boolean getEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(Boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public String getSiteKey() {
+            return siteKey;
+        }
+
+        public void setSiteKey(String siteKey) {
+            this.siteKey = siteKey;
+        }
+    }
+
     public class Company {
 
         @ParameterKey(Key.COMPANY_NAME)
@@ -239,10 +523,6 @@ public class PortalConfigEntity {
             return userCreation;
         }
 
-        public void setUserCreation(Enabled userCreation) {
-            this.userCreation = userCreation;
-        }
-
         public String getEntrypoint() {
             return entrypoint;
         }
@@ -259,9 +539,13 @@ public class PortalConfigEntity {
             this.apikeyHeader = apikeyHeader;
         }
 
-        public String getUrl() { return url; }
+        public String getUrl() {
+            return url;
+        }
 
-        public void setUrl(String url) { this.url = url; }
+        public void setUrl(String url) {
+            this.url = url;
+        }
 
         public PortalApis getApis() {
             return apis;
@@ -283,12 +567,16 @@ public class PortalConfigEntity {
             return support;
         }
 
-        public void setSupport(Enabled support)  {
+        public void setSupport(Enabled support) {
             this.support = support;
         }
 
         public Enabled getUserCreation() {
             return userCreation;
+        }
+
+        public void setUserCreation(Enabled userCreation) {
+            this.userCreation = userCreation;
         }
 
         public PortalAnalytics getAnalytics() {
@@ -501,138 +789,6 @@ public class PortalConfigEntity {
         }
     }
 
-    public static class GoogleAuthentication {
-//        @ParameterKey(Key.AUTHENTICATION_GOOGLE_CLIENTID)
-        private String clientId;
-
-        public String getClientId() {
-            return clientId;
-        }
-
-        public void setClientId(String clientId) {
-            this.clientId = clientId;
-        }
-    }
-
-    public static class GithubAuthentication {
-//        @ParameterKey(Key.AUTHENTICATION_GITHUB_CLIENTID)
-        private String clientId;
-
-        public String getClientId() {
-            return clientId;
-        }
-
-        public void setClientId(String clientId) {
-            this.clientId = clientId;
-        }
-    }
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class OAuth2Authentication {
-//        @ParameterKey(Key.AUTHENTICATION_OAUTH2_CLIENTID)
-        private String clientId;
-        @ParameterKey(Key.AUTHENTICATION_OAUTH2_NAME)
-        private String name;
-        @ParameterKey(Key.AUTHENTICATION_OAUTH2_COLOR)
-        private String color;
-        @ParameterKey(Key.AUTHENTICATION_OAUTH2_AUTHORIZATION_ENDPOINT)
-        private String authorizationEndpoint;
-        @ParameterKey(Key.AUTHENTICATION_OAUTH2_USER_LOGOUT_ENDPOINT)
-        private String userLogoutEndpoint;
-        @ParameterKey(Key.AUTHENTICATION_OAUTH2_SCOPE)
-        private List<String> scope;
-
-        public String getClientId() {
-            return clientId;
-        }
-
-        public void setClientId(String clientId) {
-            this.clientId = clientId;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getColor() {
-            return color;
-        }
-
-        public void setColor(String color) {
-            this.color = color;
-        }
-
-        public String getAuthorizationEndpoint() {
-            return authorizationEndpoint;
-        }
-
-        public void setAuthorizationEndpoint(String authorizationEndpoint) {
-            this.authorizationEndpoint = authorizationEndpoint;
-        }
-
-        public String getUserLogoutEndpoint() {
-            return userLogoutEndpoint;
-        }
-
-        public void setUserLogoutEndpoint(String userLogoutEndpoint) {
-            this.userLogoutEndpoint = userLogoutEndpoint;
-        }
-
-        public List<String> getScope() {
-            return scope;
-        }
-
-        public void setScope(List<String> scope) {
-            this.scope = scope;
-        }
-    }
-
-    public static class Enabled {
-        private boolean enabled;
-
-        Enabled() {}
-        public Enabled(boolean enabled) {
-            this.enabled = enabled;
-        }
-
-        public void setEnabled(boolean enabled) {
-            this.enabled = enabled;
-        }
-
-        public boolean isEnabled() {
-            return enabled;
-        }
-    }
-
-    public static class PortalAnalytics {
-
-        @ParameterKey(Key.PORTAL_ANALYTICS_ENABLED)
-        private Boolean enabled;
-        @ParameterKey(Key.PORTAL_ANALYTICS_TRACKINGID)
-        private String trackingId;
-
-        public Boolean isEnabled() {
-            return enabled;
-        }
-
-        public void setEnabled(Boolean enabled) {
-            this.enabled = enabled;
-        }
-
-        public void setTrackingId(String trackingId) {
-            this.trackingId = trackingId;
-        }
-
-        public String getTrackingId() {
-            return trackingId;
-        }
-
-    }
-
     public class Scheduler {
         @JsonProperty("tasks")
         @ParameterKey(Key.SCHEDULER_TASKS)
@@ -659,65 +815,6 @@ public class PortalConfigEntity {
         }
     }
 
-    public static class Alert {
-        @ParameterKey(Key.ALERT_ENABLED)
-        private Boolean enabled;
-
-        public Boolean getEnabled() {
-            return enabled;
-        }
-
-        public void setEnabled(Boolean enabled) {
-            this.enabled = enabled;
-        }
-    }
-
-    public static class PortalApis {
-        @ParameterKey(Key.PORTAL_APIS_TILESMODE_ENABLED)
-        private Enabled tilesMode;
-
-        @ParameterKey(Key.PORTAL_APIS_CATEGORY_ENABLED)
-        private Enabled categoryMode;
-
-        @ParameterKey(Key.PORTAL_APIS_SHOW_TAGS_IN_APIHEADER)
-        private Enabled apiHeaderShowTags;
-
-        @ParameterKey(Key.PORTAL_APIS_SHOW_CATEGORIES_IN_APIHEADER)
-        private Enabled apiHeaderShowCategories;
-
-        public Enabled getTilesMode() {
-            return tilesMode;
-        }
-
-        public void setTilesMode(Enabled tilesMode) {
-            this.tilesMode = tilesMode;
-        }
-
-        public Enabled getCategoryMode() {
-            return categoryMode;
-        }
-
-        public void setCategoryMode(Enabled categoryMode) {
-            this.categoryMode = categoryMode;
-        }
-
-        public Enabled getApiHeaderShowTags() {
-            return apiHeaderShowTags;
-        }
-
-        public void setApiHeaderShowTags(Enabled apiHeaderShowTags) {
-            this.apiHeaderShowTags = apiHeaderShowTags;
-        }
-
-        public Enabled getApiHeaderShowCategories() {
-            return apiHeaderShowCategories;
-        }
-
-        public void setApiHeaderShowCategories(Enabled apiHeaderShowCategories) {
-            this.apiHeaderShowCategories = apiHeaderShowCategories;
-        }
-    }
-
     public class Documentation {
         @ParameterKey(Key.DOCUMENTATION_URL)
         String url;
@@ -733,6 +830,7 @@ public class PortalConfigEntity {
 
     public class Plan {
         private PlanSecurity security;
+
         public Plan() {
             security = new PlanSecurity();
         }
@@ -740,54 +838,9 @@ public class PortalConfigEntity {
         public PlanSecurity getSecurity() {
             return security;
         }
+
         public void setSecurity(PlanSecurity security) {
             this.security = security;
-        }
-    }
-
-    public static class PlanSecurity {
-        @ParameterKey(Key.PLAN_SECURITY_APIKEY_ENABLED)
-        private Enabled apikey;
-
-        @ParameterKey(Key.PLAN_SECURITY_OAUTH2_ENABLED)
-        private Enabled oauth2;
-
-        @ParameterKey(Key.PLAN_SECURITY_KEYLESS_ENABLED)
-        private Enabled keyless;
-
-        @ParameterKey(Key.PLAN_SECURITY_JWT_ENABLED)
-        private Enabled jwt;
-
-        public Enabled getApikey() {
-            return apikey;
-        }
-
-        public void setApikey(Enabled apikey) {
-            this.apikey = apikey;
-        }
-
-        public Enabled getOauth2() {
-            return oauth2;
-        }
-
-        public void setOauth2(Enabled oauth2) {
-            this.oauth2 = oauth2;
-        }
-
-        public Enabled getKeyless() {
-            return keyless;
-        }
-
-        public void setKeyless(Enabled keyless) {
-            this.keyless = keyless;
-        }
-
-        public Enabled getJwt() {
-            return jwt;
-        }
-
-        public void setJwt(Enabled jwt) {
-            this.jwt = jwt;
         }
     }
 
@@ -1007,12 +1060,12 @@ public class PortalConfigEntity {
             return registration;
         }
 
-        public ApplicationTypes getTypes() {
-            return types;
-        }
-
         public void setRegistration(ClientRegistration registration) {
             this.registration = registration;
+        }
+
+        public ApplicationTypes getTypes() {
+            return types;
         }
 
         public class ApplicationTypes {
@@ -1101,43 +1154,6 @@ public class PortalConfigEntity {
 
         public void setEnabled(Boolean enabled) {
             this.enabled = enabled;
-        }
-    }
-
-    public static class Newsletter {
-        @ParameterKey(Key.NEWSLETTER_ENABLED)
-        private Boolean enabled;
-
-        public Boolean getEnabled() {
-            return enabled;
-        }
-
-        public void setEnabled(Boolean enabled) {
-            this.enabled = enabled;
-        }
-    }
-
-    public static class ReCaptcha {
-        @ParameterKey(Key.RECAPTCHA_ENABLED)
-        private Boolean enabled;
-
-        public Boolean getEnabled() {
-            return enabled;
-        }
-
-        public void setEnabled(Boolean enabled) {
-            this.enabled = enabled;
-        }
-
-        @ParameterKey(Key.RECAPTCHA_SITE_KEY)
-        private String siteKey;
-
-        public String getSiteKey() {
-            return siteKey;
-        }
-
-        public void setSiteKey(String siteKey) {
-            this.siteKey = siteKey;
         }
     }
 }
